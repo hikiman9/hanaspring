@@ -7,18 +7,22 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 	<%-- localhost:8080/sb1/main.css	--%>
-	<link href="<c:url value="/main.css"/>" rel="stylesheet">
+	<link href="<c:url value="/css/main.css"/>" rel="stylesheet">
 </head>
 
 <body>
 <header>
 	<h1>Main Page</h1>
 	<ul>
-		<li><a href="main.nhn">MAIN</a></li>
-		<li><a href="login.nhn">LOGIN</a></li>
-		<li><a href="register.nhn">REGISTER</a></li>
-		<li><a href="selectall.nhn">SELECTALL</a></li>
-	</ul>	
+		<li><a href="<c:url value="/" />">MAIN</a></li>
+		<li><a href="<c:url value="/login" />">LOGIN</a></li>
+		<li><a href="<c:url value="/register" />">REGISTER</a></li>
+		<li><a href="<c:url value="/cust/add" />">CUST ADD</a></li>
+		<li><a href="<c:url value="/cust/get" />">CUST GET</a></li>
+		<li><a href="<c:url value="/item/add" />">ITEM ADD</a></li>
+		<li><a href="<c:url value="/item/get" />">ITEM GET</a></li>
+
+	</ul>
 </header>
 <section>
 	<c:choose>
@@ -29,8 +33,6 @@
 		   <jsp:include page="${centerpage}.jsp"></jsp:include>
 		</c:otherwise>
 	</c:choose>
-	
-	
 </section>
 <footer></footer>
 </body>
