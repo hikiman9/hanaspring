@@ -1,15 +1,51 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2024-03-27
-  Time: 오전 9:37
-  To change this template use File | Settings | File Templates.
---%>
+<style>
+    .div_bg{
+        border: 1px solid fuchsia !important;
+    }
+</style>
+
+<script>
+
+    let jquery2 = {
+        init: function () {
+            $('#append').click(function () {
+                $('#result').append('<h3>Append ...</h3>')
+            });
+            $('#prepend').click(function () {
+                $('#result').append('<h3>Prepend ...</h3>')
+            });
+            $('#after').click(function () {
+                $('#result').append('<h3>After ...</h3>')
+            });
+            $('#before').click(function () {
+                $('#result').append('<h3>Before ...</h3>')
+            });
+            $('#remove').click(function () {
+                $('#result').append('<h3>Remove ...</h3>')
+            });
+            $('#empty').click(function () {
+                $('#result').append('<h3>Empty ...</h3>')
+            });
+        }
+    }
+
+    $(function () {
+        jquery2.init();
+    })
+
+</script>
+
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
     <h2>jQuery2 Center Page</h2>
-    <h5>Title description, Sep 2, 2017</h5>
-    <div class="fakeimg">Fake Image</div>
-    <p>Some text..</p>
-    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <button id="append" type="button" class="btn btn-primary">APPEND</button>
+    <button id="prepend" type="button" class="btn btn-primary">PREPEND</button>
+    <button id="after" type="button" class="btn btn-primary">AFTER</button>
+    <button id="before" type="button" class="btn btn-primary">BEFORE</button>
+    <button id="remove" type="button" class="btn btn-primary">REMOVE</button>
+    <button id="empty" type="button" class="btn btn-primary">EMPTY</button>
+    <div class="container div_bg" id="result">
+
+    </div>
 </div>

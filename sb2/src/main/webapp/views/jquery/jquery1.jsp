@@ -1,15 +1,61 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2024-03-27
-  Time: 오전 9:37
-  To change this template use File | Settings | File Templates.
---%>
+<style>
+    .form_bg{
+        background-color: yellow !important;
+    }
+    .form_hide{
+        display: none;
+    }
+
+</style>
+
+
+<script>
+
+    let jquery1 = {
+        init: function (){
+            $('h2').hover(function(){
+                $(this).text('in')
+            }, function (){
+                $(this).text('out');
+            });
+
+            $('#id').click(function(){
+                $(this).addClass('form_bg');
+            });
+            $('#id').blur(function(){
+                $(this).removeClass('form_bg')
+            });
+            $('#id').keyup(function(){
+                let id = $(this).val();
+                $('#pwd').val(id);
+            });
+            $('#login_form button').click(function(){
+                $('.fakeimg').empty();
+            });
+        }
+    };
+
+    $(function(){
+        jquery1.init();
+    })
+
+</script>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="container">
     <h2>jQuery1 Center Page</h2>
-    <h5>Title description, Sep 2, 2017</h5>
     <div class="fakeimg">Fake Image</div>
-    <p>Some text..</p>
-    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <form id="login_form">
+        <div class="form-group">
+            <label for="id">ID:</label>
+            <input type="text" class="form-control" id="id" placeholder="Enter ID" name="id">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="text" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+        </div>
+        <button type="button" class="btn btn-primary">Submit</button>
+    </form>
 </div>
