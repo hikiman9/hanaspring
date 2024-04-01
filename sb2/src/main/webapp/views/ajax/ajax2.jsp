@@ -1,4 +1,36 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
 
+<script>
+    let ajax2 = {
+        init: function () {
+            $('#id').keyup(function () {
+                let id = $(this).val();
+                ajax2.send(id)
+            })
+        },
+        send: function (id) {
+            $.ajax({
+                url: '<c:url value="/checkid"/>',
+                data: {'id' : id},
+                success: function (data){
+                    ajax2.display(data);
+                }
+            });
+        },
+        display: function (data) {
+            let result = 'Available';
+            if(data.trim() === '0'){
+                result = 'Not Available';
+            }
+            $('#id_span').text(result);
+        }
+    }
+
+    $(function () {
+        ajax2.init();
+    })
+</script>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
     <h2>Ajax2 Center Page</h2>

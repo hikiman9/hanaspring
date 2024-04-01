@@ -76,9 +76,9 @@ let html2 = {
             html2.display(datas);
         });
     },
-    display: function (datas){
+    display: function (data){
         let result = '';
-        $(datas).each(function (i, a){
+        $(data).each(function (i, a){
             result += '<tr>';
             result += '<td>' + a.id + '</td>';
             result += '<td>' + a.name + '</td>';

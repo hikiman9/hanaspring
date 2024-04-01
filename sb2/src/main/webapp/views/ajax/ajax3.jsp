@@ -1,15 +1,46 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 2024-03-27
-  Time: 오전 9:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+
+<script>
+    let ajax3 = {
+        init: function () {
+            $.ajax({
+                url: '/getrank',
+                success: function(data){
+                    ajax3.display(data);
+                }
+            });
+            setInterval(function () {
+                $.ajax({
+                    url: '/getrank',
+                    success: function(data){
+                        ajax3.display(data);
+                    }
+                });
+            }, 3500)
+        },
+        display: function (data){
+            let result = '';
+            $(data).each(function (i, a){
+                result += '<p>';
+                result += i + 1 + "위: ";
+                result += a;
+                result += '</p>';
+            });
+            $('#result').html(result);
+        }
+    }
+
+    $(function () {
+        ajax3.init();
+    })
+
+
+</script>
+
 <div class="container">
-    <h2>Ajax3 Center Page</h2>
-    <h5>Title description, Sep 2, 2017</h5>
-    <div class="fakeimg">Fake Image</div>
-    <p>Some text..</p>
-    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+    <h2>인기 검색어</h2>
+
+    <div class="container" id="result">
+    </div>
 </div>

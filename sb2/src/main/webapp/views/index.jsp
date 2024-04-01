@@ -18,6 +18,17 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<%--    KAKAO APPKEY--%>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5597ce572bdb5f34d523fbcb3ecbb32f"></script>
+
+<%--    highchart API    --%>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<%--    custom API--%>
     <script src="<c:url value="/js/0327.js"/>"></script>
 
     <style>
@@ -78,6 +89,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/geo/"/>">Geo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value="/chart/"/>">Chart</a>
             </li>
             <c:if test="${id != null}">
                 <li class="nav-item">
