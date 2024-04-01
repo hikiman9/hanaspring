@@ -11,25 +11,26 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <title>JSP with JML</title>
+    <title>Bootstrap 4 Website Example</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<%--    KAKAO APPKEY--%>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5597ce572bdb5f34d523fbcb3ecbb32f"></script>
+    <%-- KAKAO Map API   --%>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b91233131542ddc771208f56029a6d98"></script>
 
-<%--    highchart API    --%>
+    <%-- HighChart API   --%>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<%--    custom API--%>
-    <script src="<c:url value="/js/0327.js"/>"></script>
+    <%-- Custom API   --%>
+    <script src="<c:url value="/js/0327.js" />"></script>
 
     <style>
         .fakeimg {

@@ -1,7 +1,10 @@
 package com.hana.controller;
 
+import com.hana.app.data.dto.Chart2Dto;
 import com.hana.app.data.dto.CustDto;
 import com.hana.app.data.dto.ShopDto;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
 
 @RestController
-public class AjaxImplController {
+public class AjaxRestController {
     @RequestMapping("/getservertime")
     public Object getservertime() {
         Date date = new Date();
@@ -80,5 +83,49 @@ public class AjaxImplController {
         }
 
         return top10;
+    }
+
+    @RequestMapping("/chart2")
+    public Object chart2() {
+        JSONArray ja = new JSONArray();
+
+        List<Chart2Dto> list = new ArrayList<>();
+        // [{"name":"S001","m1":10,....},{},{},{}]
+        list.add(new Chart2Dto("S001",10,20,30,20,10,15));
+        list.add(new Chart2Dto("S002",13,30,60,10,10,25));
+        list.add(new Chart2Dto("S003",11,10,70,80,15,35));
+        list.add(new Chart2Dto("S004",18,20,20,90,22,45));
+
+        list.stream().forEach(c -> {
+            JSONObject jo = new JSONObject();
+            jo.put("name",c.getName());
+            jo.put("data",c.getM());
+            ja.add(jo);
+        });
+
+        return ja;
+    }
+
+    @RequestMapping("/chart4")
+    public Object chart4(@RequestParam("gender") String gender) {
+        JSONArray ja = new JSONArray();
+
+        List<Chart2Dto> list = new ArrayList<>();
+        // [{"name":"S001","m1":10,....},{},{},{}]
+        list.add(new Chart2Dto("f", 10, 20, 30, 5, 10, 25));
+        list.add(new Chart2Dto("m", 13, 30, 17, 10, 3, 27));
+
+        list.stream().filter(c -> c.getName().equals(gender)).forEach(c -> {
+            c.getM().stream().forEach(n ->{
+                JSONArray ja2 = new JSONArray();
+                ja2.add("OTT");
+                ja2.add(n);
+                ja2.add(ja2);
+            });
+        });
+        JSONObject jo = new JSONObject();
+        jo.put("data", ja);
+        jo.put("title", gender);
+        return ja;
     }
 }
