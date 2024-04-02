@@ -15,12 +15,12 @@ public class MainController {
     public String main(){
         return "index";
     }
+
     @RequestMapping("/login")
     public String login(Model model){
-        model.addAttribute("center", "login");
+        model.addAttribute("center","login");
         return "index";
     }
-
     @RequestMapping("/logout")
     public String logout(Model model, HttpSession httpSession){
         if(httpSession != null){
@@ -33,24 +33,28 @@ public class MainController {
                             @RequestParam("id") String id,
                             @RequestParam("pwd") String pwd, HttpSession httpSession){
         if(id.equals("qqq") && pwd.equals("111")){
-//            httpSession.setMaxInactiveInterval(80000);
+            //httpSession.setMaxInactiveInterval(80000);
             httpSession.setAttribute("id", id);
         }else{
-            model.addAttribute("center", "loginFail");
+            model.addAttribute("center","loginfail");
         }
         return "index";
     }
-    @RequestMapping("/register")
-    public String register(Model model){
-        model.addAttribute("center", "register");
-        return "index";
-    }
+
     @RequestMapping("/registerimpl")
     public String registerimpl(Model model,
                                CustDto custDto, HttpSession httpSession){
-        log.info(custDto.getId() + " " + custDto.getPwd() + " " + custDto.getName());
+        log.info(custDto.getId());
+        log.info(custDto.getName());
         httpSession.setAttribute("id", custDto.getId());
 
         return "index";
     }
+    @RequestMapping("/register")
+    public String register(Model model){
+        model.addAttribute("center","register");
+        return "index";
+    }
+
+
 }

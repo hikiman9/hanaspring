@@ -10,8 +10,8 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Chart2Dto {
     private String name;
     private long m1;
@@ -30,4 +30,5 @@ public class Chart2Dto {
         list.add(this.m6);
         return list;
     }
+
 }
