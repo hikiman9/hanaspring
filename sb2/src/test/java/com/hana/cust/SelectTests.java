@@ -9,18 +9,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @Slf4j
-class InsertTests {
+class SelectTests {
 
     @Autowired
     CustService custService;
     @Test
     void contextLoads() {
-        CustDto custDto = CustDto.builder().id("id77").pwd("pwd70").name("Jack").build();
+        List<CustDto> list = new ArrayList<>();
         try {
-            custService.add(custDto);
+            list = custService.get();
             log.info("------------------GOOOOD--------------------");
         } catch (Exception e) {
             if (e instanceof SQLException) {
@@ -30,7 +32,6 @@ class InsertTests {
             } else {
                 log.info("-----------------------Sorry EX0003-------------------------");
             }
-            e.printStackTrace();
         }
     }
 

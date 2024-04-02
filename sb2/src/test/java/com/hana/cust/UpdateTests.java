@@ -12,15 +12,15 @@ import java.sql.SQLException;
 
 @SpringBootTest
 @Slf4j
-class InsertTests {
+class UpdateTests {
 
     @Autowired
     CustService custService;
     @Test
     void contextLoads() {
-        CustDto custDto = CustDto.builder().id("id77").pwd("pwd70").name("Jack").build();
+        CustDto custDto = CustDto.builder().id("id77").pwd("pwd234").name("Himmel").build();
         try {
-            custService.add(custDto);
+            custService.modify(custDto);
             log.info("------------------GOOOOD--------------------");
         } catch (Exception e) {
             if (e instanceof SQLException) {
