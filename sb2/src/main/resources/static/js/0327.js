@@ -32,22 +32,22 @@ let register = {
     init: function (url){
         this.url = url;
         $('#register_form button').click(function (){
-            let name = $('#regi_name').val();
-            let id = $('#regi_id').val();
-            let pwd = $('#regi_pwd').val();
+            let name = $('#name').val();
+            let id = $('#id').val();
+            let pwd = $('#pwd').val();
             if(name == '' || name == null){
                 alert('이름를 입력하세요');
-                $('#regi_name').focus();
+                $('#name').focus();
                 return;
             }
             if(id == '' || id == null){
                 alert('id를 입력하세요');
-                $('#regi_id').focus();
+                $('#id').focus();
                 return;
             }
             if(pwd == '' || pwd == null){
                 alert('pwd를 입력하세요');
-                $('#regi_pwd').focus();
+                $('#pwd').focus();
                 return;
             }
             register.send();

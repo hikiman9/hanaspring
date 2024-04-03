@@ -9,8 +9,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
+    let add = {
+        init: function (url){
+            this.url = url;
+            $('#register_form button').click(function (){
+                let name = $('#name').val();
+                let id = $('#id').val();
+                let pwd = $('#pwd').val();
+                if(name == '' || name == null){
+                    alert('이름를 입력하세요');
+                    $('#name').focus();
+                    return;
+                }
+                if(id == '' || id == null){
+                    alert('id를 입력하세요');
+                    $('#id').focus();
+                    return;
+                }
+                if(pwd == '' || pwd == null){
+                    alert('pwd를 입력하세요');
+                    $('#pwd').focus();
+                    return;
+                }
+                add.send();
+            });
+        },
+        send: function (){
+            $('#register_form').attr({
+                'action': this.url,
+                'method': 'POST'
+            });
+            $('#register_form').submit();
+        }
+    };
+
     $(function(){
-        register.init('<c:url value="/registerimpl"/>');
+        add.init('<c:url value="/cust/addimpl"/>');
     });
 </script>
 
