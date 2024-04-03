@@ -61,7 +61,7 @@
     <c:otherwise>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="#">${id}</a>
+                <a class="nav-link" href="<c:url value="/mypage/"/>?id=${id}">${id}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<c:url value="/logout" />">LOGOUT</a>

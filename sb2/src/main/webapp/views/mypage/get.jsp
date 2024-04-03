@@ -17,21 +17,20 @@
     });
 </script>
 <div class="container">
-    <h2>Get Cust</h2>
+    <h2>주소록 목록</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>PWD</th>
-                <th>NAME</th>
+                <th>주소 이름</th>
+                <th>상세 주소</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="c" items="${custs}">
+            <c:forEach var="ad" items="${addrs}">
                 <tr>
-                    <td><a href="<c:url value="/cust/detail"/>?id=${c.id}">${c.id}</a></td>
-                    <td>${c.pwd}</td>
-                    <td>${c.name}</td>
+<%--                    <td><a href="<c:url value="/mypage/detail"/>?id=${ad.custId}">${ad.addrName}</a></td>--%>
+                    <td>${ad.addrName}</td>
+                    <td>${ad.addrDetail}</td>
                 </tr>
             </c:forEach>
         </tbody>

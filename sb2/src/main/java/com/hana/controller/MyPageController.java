@@ -1,6 +1,8 @@
 package com.hana.controller;
 
+import com.hana.app.data.dto.AddrDto;
 import com.hana.app.data.dto.CustDto;
+import com.hana.app.service.AddrService;
 import com.hana.app.service.CustService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -13,43 +15,54 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/cust")
-public class CustController {
+@RequestMapping("/mypage")
+public class MyPageController {
 
     final CustService custService;
-    String dir = "cust/";
+    final AddrService addrService;
+    String dir = "mypage/";
     @RequestMapping("/")
-    public String main(Model model){
-        model.addAttribute("left", dir + "left");
-        model.addAttribute("center", dir + "center");
+    public String main(Model model, @RequestParam("id") String id){
+        try {
+            CustDto custDto = null;
+            custDto = custService.get(id);
+            model.addAttribute("cust", custDto);
+            model.addAttribute("left", dir + "left");
+            model.addAttribute("center", dir + "center");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         return "index";
     }
+
     @RequestMapping("/add")
-    public String add(Model model){
+    public String add(Model model, @RequestParam("id") String id){
+        model.addAttribute("id", id);
         model.addAttribute("left", dir + "left");
         model.addAttribute("center", dir + "add");
         return "index";
     }
     @RequestMapping("/addimpl")
     public String addimpl(Model model,
-                               CustDto custDto, HttpSession httpSession){
+                          AddrDto addrDto, HttpSession httpSession){
         try {
-            custService.add(custDto);
+            addrService.add(addrDto);
         } catch (Exception e) {
 //            throw new RuntimeException(e);
             model.addAttribute("center", "registerFail");
             return "index";
         }
-        return "redirect:/cust/detail?id=" + custDto.getId();
+        return "redirect:/mypage/get?id=" + addrDto.getCustId();
     }
 
     @RequestMapping("/get")
-    public String get(Model model){
+    public String get(Model model, @RequestParam("id") String id){
         // Data를 DB에서 조회한다.
-        List<CustDto> list = null;
+        List<AddrDto> list = null;
         try {
-            list = custService.get();
-            model.addAttribute("custs", list);
+            list = addrService.get(id);
+            model.addAttribute("addrs", list);
             model.addAttribute("left", dir + "left");
             model.addAttribute("center", dir + "get");
         } catch (Exception e) {
