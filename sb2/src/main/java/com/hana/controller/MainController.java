@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Random;
+
 @Controller
 @Slf4j
 @RequiredArgsConstructor
@@ -20,7 +22,9 @@ public class MainController {
     final CustService custService;
     @RequestMapping("/")
     public String main(){
-        log.info("낄낄슨");
+        Random r = new Random();
+        int num = r.nextInt(100)+1;
+        log.info(num+"");
         return "index";
     }
     @RequestMapping("/login")
