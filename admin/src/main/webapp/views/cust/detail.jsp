@@ -2,6 +2,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script>
+
+    let detail = {
+        init: function () {
+            $('#register_form #btn_mod').click(() => {
+                $('#register_form').attr({
+                    'action': '<c:url value="/cust/detail/modimpl"/> ',
+                    'method': 'POST'
+                });
+                $('#register_form').submit();
+            })
+            $('#register_form #btn_del').click(() => {
+                let sure = confirm('정말 삭제하시겠습니까?')
+                if(sure){
+                    $('#register_form').attr({
+                        'action': '<c:url value="/cust/detail/delimpl"/> ',
+                        'method': 'POST'
+                    });
+                    $('#register_form').submit();
+                }
+            })
+        }
+    };
+    $(function () {
+       detail.init();
+    });
+
+</script>
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -17,7 +46,7 @@
                 <form id="register_form">
                     <div class="form-group">
                         <label for="id">ID:</label>
-                        <input type="text" value="${cust.id}" class="form-control" id="id" placeholder="Enter id" name="id">
+                        <input type="text" value="${cust.id}" class="form-control" id="id" placeholder="Enter id" name="id" readonly>
 
                     </div>
                     <div class="form-group">
@@ -30,7 +59,8 @@
                         <input type="text" value="${cust.name}"  class="form-control" id="name" placeholder="Enter name" name="name">
 
                     </div>
-                    <button type="button" class="btn btn-primary">REGISTER</button>
+                    <button id="btn_mod" type="button" class="btn btn-primary">REGISTER</button>
+                    <button id="btn_del" type="button" class="btn btn-danger">DELETE</button>
                 </form>
             </div>
         </div>
