@@ -1,7 +1,10 @@
 package com.hana.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import com.hana.app.data.dto.CustDto;
 import com.hana.app.service.CustService;
+import com.hana.util.StringEnc;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -49,6 +52,7 @@ public class CustController {
         List<CustDto> list = null;
         try {
             list = custService.get();
+            list.stream().forEach(c -> {c.setName(StringEnc.decryptor(c.getName()));});
             model.addAttribute("custs", list);
             model.addAttribute("left", dir + "left");
             model.addAttribute("center", dir + "get");
@@ -58,6 +62,23 @@ public class CustController {
 
         return "index";
     }
+
+    @RequestMapping("/allpage")
+    public String allPage(@RequestParam("pageNo") int pageNo, Model model){
+        PageInfo<CustDto> p;
+        try {
+            p = new PageInfo<>(custService.getPage(pageNo), 5);
+            model.addAttribute("cpage", p);
+            model.addAttribute("left", dir + "left");
+            model.addAttribute("center", dir + "allpage");
+            model.addAttribute("target", "/cust");
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+
+        return "index";
+    }
+
     @RequestMapping("/detail")
     public String detail(Model model, @RequestParam("id") String id) {
         // id 값을 DB에서 조회

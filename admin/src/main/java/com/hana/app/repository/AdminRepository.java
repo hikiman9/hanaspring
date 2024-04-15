@@ -5,6 +5,7 @@ import com.hana.app.frame.HanaRepository;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+
 @Repository
 @Mapper
 public interface AdminRepository extends HanaRepository<String, AdminDto> {

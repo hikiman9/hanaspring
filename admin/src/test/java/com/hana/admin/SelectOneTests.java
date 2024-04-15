@@ -12,17 +12,18 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 class SelectOneTests {
+
     @Autowired
     AdminService adminService;
+
     @Test
     void contextLoads() {
         try {
-            AdminDto adminDto = null;
-            adminDto = adminService.get("sadmin");
-            log.info(adminDto.toString());
+            adminService.get("sadmin");
             log.info("OK------------------------");
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class AdminDto {
     private String id;
     private String pwd;
-    // private int arole;
     private RoleDto role;
+//    private int arole;
 }

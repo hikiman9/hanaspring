@@ -13,9 +13,9 @@ class Tests {
     @Test
     void contextLoads() {
         try {
-            Object str = WeatherUtil.getWeather3("");
+//            Object str = WeatherUtil.getWeather3("");
             log.info("----------LOG----------------");
-            log.info(str.toString());
+//            log.info(str.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

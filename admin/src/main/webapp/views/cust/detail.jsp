@@ -1,35 +1,34 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <script>
-
-    let detail = {
-        init: function () {
-            $('#register_form #btn_mod').click(() => {
-                $('#register_form').attr({
-                    'action': '<c:url value="/cust/detail/modimpl"/> ',
-                    'method': 'POST'
-                });
-                $('#register_form').submit();
-            })
-            $('#register_form #btn_del').click(() => {
-                let sure = confirm('정말 삭제하시겠습니까?')
-                if(sure){
-                    $('#register_form').attr({
-                        'action': '<c:url value="/cust/detail/delimpl"/> ',
-                        'method': 'POST'
-                    });
-                    $('#register_form').submit();
+    let cust_detail = {
+        init:function(){
+            $('#detail_form > #btn_update').click(()=>{
+                this.send();
+            });
+            $('#detail_form > #btn_delete').click(()=>{
+                let c = confirm('삭제하시겠습니까?');
+                if(c == true){
+                    let id = $('#id').val();
+                    location.href = '<c:url value="/cust/delete"/>?=id'+id;
                 }
-            })
+            });
+        },
+        send:function(){
+            $('#detail_form').attr({
+                'method':'post',
+                'action':'<c:url value="/cust/update"/>'
+            });
+            $('#detail_form').submit();
         }
     };
-    $(function () {
-       detail.init();
+    $(function(){
+        cust_detail.init();
     });
-
 </script>
+
+
 
 <div class="container-fluid">
 
@@ -43,10 +42,10 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <form id="register_form">
+                <form id="detail_form">
                     <div class="form-group">
                         <label for="id">ID:</label>
-                        <input type="text" value="${cust.id}" class="form-control" id="id" placeholder="Enter id" name="id" readonly>
+                        <input type="text"  readonly="readonly" value="${cust.id}" class="form-control" id="id" placeholder="Enter id" name="id">
 
                     </div>
                     <div class="form-group">
@@ -59,8 +58,9 @@
                         <input type="text" value="${cust.name}"  class="form-control" id="name" placeholder="Enter name" name="name">
 
                     </div>
-                    <button id="btn_mod" type="button" class="btn btn-primary">REGISTER</button>
-                    <button id="btn_del" type="button" class="btn btn-danger">DELETE</button>
+                    <button id="btn_update" type="button" class="btn btn-primary">Update</button>
+                    <button id="btn_delete" type="button" class="btn btn-primary">Delete</button>
+
                 </form>
             </div>
         </div>

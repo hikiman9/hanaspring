@@ -4,11 +4,22 @@ server:
     encoding:
       charset: UTF-8
       force: true
+    session:
+      timeout: 10m
 spring:
   mvc:
     view:
       prefix: /views/
       suffix: .jsp
+  session:
+    redis:
+      namespace: spring:session
+    store-type: redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 1111
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     url: jdbc:log4jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8
@@ -16,6 +27,7 @@ spring:
 #    url: jdbc:mysql://127.0.0.1:3306/shopdb?characterEncoding=utf8&serverTimezone=Asia/Seoul
     username: user01
     password: 111111
+
 
 mybatis:
   type-aliases-package: com.hana.app.data.dto
@@ -29,5 +41,13 @@ logging:
 
 app:
   dir:
-    imgdir: file:C:/project/imgs
-    logdir: file:C:/project/logs
+    imgdir: file:///C:/project/imgs/  # 화면 출력 용
+    uploadimgdir: C:/project/imgs/    # 파일 Write 용
+    logdir: file:///C:/project/logs/
+  url:
+    chart-url: http://127.0.0.1:81
+    server-url: http://172.16.20.55:81
+  key:
+    wkey: mGAGMDcDpL%2BQulFKZpRjAi4X%2FWUoEAE1PSVYWEFTpJznwjLlt2NJ10OS%2BU2G2qov4o%2FkaLTZoKEmokQ7gGW3rw%3D%3D
+    whkey: 2ed98900afa2fd004ce44349c37ad24c
+    #    file:/root/users/project/imgs/

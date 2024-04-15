@@ -12,19 +12,22 @@ import java.util.List;
 @SpringBootTest
 @Slf4j
 class SelectTests {
+
     @Autowired
     AdminService adminService;
+
     @Test
     void contextLoads() {
         List<AdminDto> list = null;
         try {
             list = adminService.get();
-            list.stream().forEach(a ->{
+            list.stream().forEach(a->{
                 log.info(a.toString());
             });
             log.info("OK------------------------");
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

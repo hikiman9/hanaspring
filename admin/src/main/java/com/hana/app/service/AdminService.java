@@ -7,10 +7,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AdminService implements HanaService<String, AdminDto> {
+
     private final AdminRepository adminRepository;
+
     @Override
     public int add(AdminDto adminDto) throws Exception {
         return 0;
