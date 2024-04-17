@@ -46,8 +46,10 @@ app:
     logdir: file:///C:/project/logs/
   url:
     chart-url: http://127.0.0.1:81
-    server-url: http://172.16.20.55:81
+    server-url: http://172.16.21.187:81
   key:
     wkey: mGAGMDcDpL%2BQulFKZpRjAi4X%2FWUoEAE1PSVYWEFTpJznwjLlt2NJ10OS%2BU2G2qov4o%2FkaLTZoKEmokQ7gGW3rw%3D%3D
     whkey: 2ed98900afa2fd004ce44349c37ad24c
+    ncp-id: qyhmwu62jr
+    ncp-secret: b72z3TVhRZlDWs31lSp6JDXxaCuLlOAoYSmx7j6s
     #    file:/root/users/project/imgs/

@@ -35,5 +35,13 @@
     <li class="nav-item">
         <a class="nav-link" href="<c:url value="/board/allpage"/> ">PAGE</a>
     </li>
-
+    <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/pic"/> ">PIC</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/summary"/> ">SUMMARY</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<c:url value="/ocr"/> ">OCR</a>
+    </li>
 </ul>

@@ -2,28 +2,27 @@ package com.hana.controller;
 
 import com.hana.app.data.dto.BoardDto;
 import com.hana.app.data.dto.CustDto;
+import com.hana.app.data.dto.OcrDto;
 import com.hana.app.data.entity.LoginCust;
 import com.hana.app.repository.LoginCustRepository;
 import com.hana.app.service.BoardService;
 import com.hana.app.service.CustService;
-import com.hana.util.StringEnc;
-import com.hana.util.WeatherUtil;
+import com.hana.util.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -44,6 +43,13 @@ public class MainController {
     @Value("${app.url.serverurl}")
     String serverurl;
 
+    @Value("${app.dir.uploadimgdir}")
+    String uploadImgDir;
+    @Value("${app.key.ncp-id}")
+    String ncpId;
+    @Value("${app.key.ncp-secret}")
+    String ncpSecret;
+
     @RequestMapping("/")
     public String main(Model model) throws Exception {
         Random r = new Random();
@@ -61,6 +67,20 @@ public class MainController {
     public String login(Model model){
         model.addAttribute("center", "login");
         return "index";
+    }
+    @RequestMapping("/chat2")
+    public String chat2(Model model){
+        model.addAttribute("serverurl", serverurl);
+        model.addAttribute("center", "chat2");
+        return "index";
+    }
+
+    @RequestMapping("/saveimg")
+    @ResponseBody
+    public String saveimg(@RequestParam("file") MultipartFile file) throws IOException {
+        String imgname = file.getOriginalFilename();
+        FileUploadUtil.saveFile(file, uploadImgDir);
+        return imgname;
     }
 
     @RequestMapping("/logoutimpl")
@@ -107,6 +127,12 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping("/pic")
+    public String pic(Model model){
+        model.addAttribute("center", "pic");
+        return "index";
+    }
+
     @RequestMapping("/chat")
     public String chat(Model model){
         model.addAttribute("center", "chat");
@@ -144,5 +170,38 @@ public class MainController {
     @RequestMapping("/wh")
     public Object wh(Model model) throws IOException, ParseException {
         return WeatherUtil.getWeather("109", wkey);
+    }
+
+    @RequestMapping("/summary")
+    public String summary(Model model){
+        model.addAttribute("center", "summary");
+        return "index";
+    }
+
+    @ResponseBody
+    @RequestMapping("/summaryimpl")
+    public Object summaryimpl(@RequestParam("content") String content) throws IOException, ParseException {
+        JSONObject result = (JSONObject) NcpUtil.getSummary(ncpId, ncpSecret, content);
+        return result;
+    }
+
+    @RequestMapping("/ocr")
+    public String ocr(Model model){
+        model.addAttribute("center", "ocr");
+        return "index";
+    }
+
+    @RequestMapping("/ocrimpl")
+    public String ocrimpl(Model model, OcrDto ocrDto) throws IOException {
+        String imgname = ocrDto.getImage().getOriginalFilename();
+
+        FileUploadUtil.saveFile(ocrDto.getImage(), uploadImgDir);
+        JSONObject jsonObject = OCRUtil.getResult(uploadImgDir, imgname);
+        Map<String, String> map = OCRUtil.getData(jsonObject);
+
+        model.addAttribute("imgname", imgname);
+        model.addAttribute("result", map);
+        model.addAttribute("center", "ocr");
+        return "index";
     }
 }
